@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react' 
 import { Redirect } from 'react-router-dom'
 import { signInWithGoogle, logOut } from '../database/firebase'
+import '../App.css';
+import leaves from'../assets/Leaves.png';
 
 function Login({user, setUser}){
     if(user){
@@ -13,6 +15,7 @@ function Login({user, setUser}){
                 <div className="row">
                     <div className="col-md-12 g-btn"> <button onClick={() => {signInWithGoogle(setUser)}} className="btn btn-lg btn-google btn-block text-uppercase btn-outline"><img alt="google" src="https://img.icons8.com/color/16/000000/google-logo.png"></img> Login with Google</button> </div>
                 </div>
+                <img src={leaves} className="leaves" alt="leaves" />
             </div>
         </div>
     );

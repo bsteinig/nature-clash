@@ -1,42 +1,74 @@
 import React, { useEffect, useState } from 'react';
-import { getGlobalLeaders } from '../database/firebase' 
+import { fetchGlobalLeaders } from '../database/firebase' 
+import earth from '../assets/earth.svg'
+import Menu from '../components/menu'
 
 function Dashboard({user}){
 
+    const [clicked, setClicked] = useState(false);
+    const [oneTimeClicked, setOneTimeClicked] = useState(false);
+    const [unlimitedClicked, setUnlimitedClicked] = useState(false);
     const [loading, setLoading] = useState(false);
     const [pulled, setPulled] = useState(false);
-    const [leaderboard, setLeaderboard] = useState({});
+    const [leaderboard, setLeaderboard] = useState([]);
     useEffect(() => {
-        if (!pulled) {
-            getGlobalLeaders(user, (retrivedData) => {
-              console.log(retrivedData);
-              if (retrivedData) {
-                setLeaderboard(retrivedData)  
-                setPulled(true);
-                setLoading(false);
-              }else{
-                setLoading(false)
-              }
-            });
+      if (!pulled) {
+        fetchGlobalLeaders((retrivedData) => {
+          if (retrivedData) { 
+            retrivedData.sort((a,b) => (a.score > b.score) ? -1 : 1)
+            setLeaderboard((retrivedData)) 
+            setPulled(true);
+            setLoading(false);
+          }else{
+            setLoading(false)
           }
+        });
+    } 
     }, []);
 
+    function buttonClicked() {
+      setClicked(prevclicked => !prevclicked)
+      if(clicked){
+        document.getElementByID("one-time").innerHTML = "Pick up trash";
+        document.getElementByID("unlimited").innerHTML = "Plant a Tree";
+      }
+    }
+
+    function oneTimeButtonClicked() {
+      
+    }
+
+    function unlimitedButtonClicked() {
+      
+    }
+
     return(
-        <div className="home">
-            <h1  className="title">Leaderboard</h1>
-            <span className="log-tag">Welcome Back, <span className="username">{user.displayName}</span></span>
-            <img alt="user profile" className="propic" src={user.photoURL}width="32" height="32"/>
-            <a className="action-group" href="/groups">See Groups</a>
+        <div className="dashboard">
+            <img src={earth} alt="earth" className="icon"/>
+            <button onClick={() => buttonClicked} className='global-challenges'>see all challenges</button>
+            <button onClick={() => oneTimeButtonClicked} className="global-challenges one-time" id='one-time'></button>
+            <button onClick={() => unlimitedButtonClicked} className="global-challenges unlimited" id='unlimed'></button>
+            <h1 className="title">Leaderboard</h1>
+            <div className='bullet-title'>
+              <p>Name</p>
+              <p>Points</p>
+            </div>
             { loading ? 
             <></>
             :
-            <ul> 
-                {leaderboard.map(element => <li key={element}>{element}</li>)}
-            </ul>
+            <table className="leaderboard"> 
+              <tbody>
+                {leaderboard.map((element,index) => 
+                <tr className="entry" key={element.name}> 
+                  <td>{`${index+1}.`}</td> 
+                  <td className="leaderName">{`${element.name} `}</td>  
+                  <td>{`${element.score} pts`}</td>
+                </tr>
+              )}
+              </tbody>
+            </table>
             }
-            <a className="nav-link" href="/logout">
-                    Logout
-            </a>
+            <Menu user={user}/>
         </div>
     )
 }

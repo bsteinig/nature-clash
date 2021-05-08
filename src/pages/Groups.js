@@ -1,5 +1,6 @@
 import React,  { useEffect, useState } from 'react';
 import { getUserGroups } from '../database/firebase'
+import Menu from '../components/menu'
 
 function Groups({user}){
 
@@ -37,6 +38,7 @@ function Groups({user}){
             <a className="nav-link" href="/dashboard">
                     Go Home
             </a>
+            <Menu user={user}/>
         </div>
     )
 }

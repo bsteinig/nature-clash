@@ -84,8 +84,21 @@ export const createUserData = (data) => {
     let ref = defaultDatabase.ref("/")
     let newTimeline = ref.child(`users/${data.user.uid}`);
     newTimeline.set(data)
-    let newGlobal = ref.child(`global/leaderboard/${data.user.uid}`)
-    newGlobal.set(0)
+    
+    ref.child("global/leaderboard").get().then((snapshot) => {
+      if (snapshot.exists()) {
+        let arr = snapshot.val();
+        arr.push({name: data.user.displayName, img: data.user.photoURL, score: 0})
+        let newGlobal = ref.child(`global/leaderboard/`)
+        newGlobal.set(arr)
+      } else {
+        let arr = [{name: data.user.displayName, img: data.user.photoURL, score: 0}]
+        let newGlobal = ref.child(`global/leaderboard/`)
+        newGlobal.set(arr)
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
 }
 
 export const updateToExisting = (data) => {
@@ -113,7 +126,7 @@ export const getUserGroups = (user, callback) => {
   })
 };
 
-export const getGlobalLeaders = (user, callback) => {
+export const fetchGlobalLeaders = (callback) => {
   var defaultDatabase = firebase.database();
   let ref = defaultDatabase.ref("/");
   let timelines = ref.child(`global/leaderboard`);

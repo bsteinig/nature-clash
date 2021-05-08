@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+:root {
+    --red: #FD6F63;
+    --shadow-red: #aa4444;
+    --lighest-green: #D6FEC3;
+    --light-green: #8FC89F;
+    --green: #669B6B;
+    --dark-green: #2F4F4F;
+    --darkest-green: #031F23;
+    --black: #1B1426;
+    --light-blake: #3F394A;
+    --yellow: #DAA520;
+    --light-yellow: #E6D896;
+    --white: #FDFFF5;
+    --pink: #FAEBD7;
+    --display-font: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+*{ 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+    font-family: var(--display-font);
+}
+
+/*
+Home
+*/
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--pink);
+    height: 100vh;
+}
+
+.logo {
+    margin-top: 8rem;
+    width: 75vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: .5rem;
+}
+
+.leaves{
+    width: 100vw;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.nav-link {
+    margin-top: 10rem;
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--red);
+    padding: 1.5rem 3rem;
+    border-radius: 2.75rem 2.75rem 0 2.75rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 1;
+} 
+
+a:hover {
+    background-color: var(--shadow-red);
+}
+
+/*
+Sign In
+*/
+
+.login-page {
+    background-color: var(--pink);
+    height: 100vh;
+}
+
+.import-txt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--red);
+    padding: 1.5rem 3rem;
+}
+
+.g-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.btn-google {
+    display: inline-block;
+    background: white;
+    color: #444;
+    width: 190px;
+    border-radius: 5px;
+    border: thin solid #888;
+    box-shadow: 1px 1px 1px grey;
+    white-space: nowrap;
+    padding: 1rem;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+/* 
+Dashboard
+*/
+
+.dashboard{
+    background-color: var(--dark-green);
+    color: var(--pink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.global-challenges {
+    border: .2rem;
+    border-style: solid;
+    padding: .5rem;
+    border-color: var(--pink);
+    cursor: pointer;
+}
+
+.bullet-title {
+    display: flex;
+    
+}
+
+.leaderboard {
+    padding: 1rem 1rem;
+    list-style-type: none;
+    background-color: var(--pink);
+    color: var(--dark-green);
+    border-radius: 1rem;
+    width: 92.5%;
+    text-align: left;
+    border-width: .5rem;
+    font-size: 1.5rem;
+}
+
+.entry {
+    text-align: left;
+}
+
+.leaderName {
+    text-align: left;
+}
+
+/*
+ Menu Bar
+*/
+
+.menu {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 5vw;
+    background-color: var(--darkest-green);
+}
+
+.propic{
+    height: 50px;
+    border-radius: 25px;
+}
+
+.action-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    text-decoration: none;
+    color: var(--pink);
+    border-width: 1px;
+    border-color: var(--darkest-green);
+    padding: 1rem;
+}
+
+.stick{
+    height: 75px;
+    width: 2px;
+    background-color: var(--dark-green);
+}
