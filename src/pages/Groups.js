@@ -1,5 +1,5 @@
 import React,  { useEffect, useState } from 'react';
-import { getUserGroups, createGroup, fetchGroup, fetchJoinList, joinGroup } from '../database/firebase'
+import { getUserGroups, createGroup, fetchGroup, fetchJoinList, joinGroup, addGroupScore } from '../database/firebase'
 import Menu from '../components/menu'
 import { Formik, Form as Formk ,Field, ErrorMessage } from 'formik'
 import * as yup from 'yup'
@@ -28,6 +28,8 @@ function Groups({user}){
     const [join, setJoin] = useState(-1);
     const [groupData, setGroupData] = useState([])
     const [joinList, setJoinList] = useState([])
+    const [userIndex, setUserIndex] = useState(0);
+    
     useEffect(() => {
         setSelected(-1)
         if (!pulled) {
@@ -39,8 +41,10 @@ function Groups({user}){
                   setGroups(["Join some groups to get started! ;)"])
                 }else {
                   setGroups(retrivedData.slice(1))
+                  console.log(retrivedData)
                   for(let i = 1; i < retrivedData.length; i++){
                     fetchGroup(retrivedData[i], (data) => {
+                      data.leaderboard.sort((a,b) => (a.score > b.score) ? -1 : 1)
                       setGroupData(arr => [...arr, data])
                     })
                   }
@@ -56,7 +60,7 @@ function Groups({user}){
           return () => {
             setSelected(0); // This worked for me
           };
-    }, []);
+    }, [pulled]);
 
     const createGroupHandler = () => {
       setCreating(true)
@@ -75,13 +79,18 @@ function Groups({user}){
     }
 
     const selectJoinHandler = (id, e) => {
-      
       setJoin(id)
     }
 
     const selectGroupHandler = (id, e) => {
       setSelected(id)
       if(id !== -1){
+        let obj = groupData[id].leaderboard.find((o, i) => {
+          if (o.name === user.displayName) {
+              setUserIndex(i)
+              return true; // stop searching
+          }
+        });
         setJoining(false)
         setCreating(false)
       }
@@ -126,6 +135,23 @@ function Groups({user}){
       createGroup(data)
       submitProps.resetForm();
       alert('Group Created!')
+    }
+
+    function challengeClicked() {
+      let data = { groupName: groups[selected], name: user.displayName, score: 5 }
+      addGroupScore(data)
+      fetchGroup(groups[selected], (data) => {
+        let arr = groupData;
+        data.leaderboard.sort((a,b) => (a.score > b.score) ? -1 : 1)
+        arr[selected] = data;
+        setGroupData(arr)
+      })
+      let obj = groupData[selected].leaderboard.find((o, i) => {
+        if (o.name === user.displayName) {
+            setUserIndex(i)
+            return true; // stop searching
+        }
+      });
     }
 
 
@@ -201,7 +227,7 @@ function Groups({user}){
               <></>
             :
               <div className="group-leaderboard">
-                <p className="challenge" >{groupData[selected].challenge}</p>
+                <button onClick={() => challengeClicked()} className="challenge" >{groupData[selected].challenge}</button>
                 <img className="image" src={groupData[selected].banner} alt="banner" height="200"/>
                 <h1 className="title-dash">Leaderboard</h1>
                 <div id="HASH" className="leaderboard-element-titles shift-right">
@@ -215,7 +241,7 @@ function Groups({user}){
                 <Leaderboard data={groupData[selected].leaderboard}/>
                 <div className="center-this" >
                 <div className="user">
-                . {`${user.displayName} `}  pts
+                {`${userIndex+1}`}. {`${user.displayName} `}  {`${groupData[selected].leaderboard[userIndex].score}`}pts
                 </div>
                 </div>
               </div>

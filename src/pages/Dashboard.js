@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchGlobalLeaders, fetchGlobalChallenges, getUserData } from '../database/firebase' 
+import { fetchGlobalLeaders, fetchGlobalChallenges, getUserData, addGlobalScore } from '../database/firebase' 
 import earth from '../assets/earth.svg'
 import Menu from '../components/menu'
 import Leaderboard from '../components/leaderboard';
@@ -13,12 +13,20 @@ function Dashboard({user}){
     const [pulled, setPulled] = useState(false);
     const [leaderboard, setLeaderboard] = useState([]);
     const [challenges, setChallenges] = useState([]);
+    const [userIndex, setUserIndex] = useState(0);
+
     useEffect(() => {
       if (!pulled) {
         fetchGlobalLeaders((retrivedData) => {
           if (retrivedData) { 
             retrivedData.sort((a,b) => (a.score > b.score) ? -1 : 1)
             setLeaderboard((retrivedData)) 
+            let obj = retrivedData.find((o, i) => {
+              if (o.name === user.displayName) {
+                  setUserIndex(i)
+                  return true; // stop searching
+              }
+            });
             setPulled(true);
             setLoading(false);
           }else{
@@ -35,21 +43,25 @@ function Dashboard({user}){
       setClicked(prevclicked => !prevclicked)
     }
 
-    function displayChallenges() {
-      if(clicked) {
-        return <div className ="global-chal">
-          <button onClick={() => oneTimeButtonClicked} className="global-challenges one-time" id='one-time'>Pick Up 10 Pieces of Trash - 5 pts</button>
-          <button onClick={() => unlimitedButtonClicked} className="global-challenges unlimited" id='unlimed'>Plant a Tree - 100 pts</button>
-        </div>
-      }
-    }
-
     function oneTimeButtonClicked() {
-      
+      let data = { name: user.displayName, score: 100 }
+      addGlobalScore(data)
+      console.log('here')
+      document.getElementById('one-time').style.visibility = 'hidden'
     }
 
     function unlimitedButtonClicked() {
-      
+      let data = { name: user.displayName, score: 5 }
+      addGlobalScore(data)
+    }
+
+    function displayChallenges() {
+      if(clicked) {
+        return <div className ="global-chal">
+          <button onClick={() => unlimitedButtonClicked()} className="global-challenges unlimited" id='unlimited'>Pick Up 10 Pieces of Trash - 5 pts</button>
+          <button onClick={() => oneTimeButtonClicked()} className="global-challenges one-time" id='one-time'>Plant a Tree - 100 pts</button>
+        </div>
+      }
     }
 
     return(
@@ -72,11 +84,14 @@ function Dashboard({user}){
             { loading ? 
             <></>
             :
-            <Leaderboard data={leaderboard}/>
-            }
-            <div className="user">
-            . {`${user.displayName} `}  pts
+            <div>
+              <Leaderboard data={leaderboard}/>
+              <div className="user">
+                  {`${userIndex+1}`}. {`${user.displayName} `}  {`${leaderboard[userIndex].score}`}pts
+              </div>
             </div>
+            }
+            
             <Menu user={user}/>
         </div>
     )

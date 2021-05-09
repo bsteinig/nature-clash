@@ -236,7 +236,7 @@ button:hover {
 .user {
     padding: 1rem .25rem;
     list-style-type: none;
-    background-color: var(--green);
+    background-color: var(--light-yellow);
     color: var(--dark-green);
     border-radius: 0 0 1rem 1rem;
     width: 92.5%;
@@ -245,6 +245,7 @@ button:hover {
     font-size: 1.5rem;
     position: absolute;
     bottom: 6.8rem;
+    right: .9rem;
 }
 
 /*
@@ -442,7 +443,7 @@ button:hover {
 
 .bullet {
     margin-left: 1rem;
-    list-style-type: circle;
+    list-style-type: none;
     color: var(--pink);
 }
 
@@ -480,8 +481,17 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: .5rem;
+    border: .2rem;
+    border-style: solid;
+    padding: .5rem;
+    border-color: var(--pink);
+    background-color: transparent;
     color: var(--pink);
-    margin-top: 1rem;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .image {

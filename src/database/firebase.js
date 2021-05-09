@@ -220,3 +220,40 @@ export const removeUserData = (user, timeline) => {
   let timelines = ref.child(`timelines/${user.uid}/${timeline}`);
   timelines.remove()
 };
+
+export const addGlobalScore = (data) => {
+  var defaultDatabase = firebase.database();
+  let ref = defaultDatabase.ref("/");
+  ref.child("global/leaderboard").get().then((snapshot) => {
+    let arr = snapshot.val(); // leaderboard array
+    let obj = arr.find((o, i) => {
+      if (o.name === data.name) {
+          arr[i] = { name: data.name, score: arr[i].score + data.score };
+          return true; // stop searching
+      }
+    });
+    let newGlobal = ref.child(`global/leaderboard/`)
+    newGlobal.set(arr)
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+export const addGroupScore = (data) => {
+  var defaultDatabase = firebase.database();
+  let ref = defaultDatabase.ref("/");
+  ref.child(`groups/${data.groupName}/leaderboard`).get().then((snapshot) => {
+    let arr = snapshot.val(); // leaderboard array
+    console.log(data,arr)
+    let obj = arr.find((o, i) => {
+      if (o.name === data.name) {
+          arr[i] = { name: data.name, score: arr[i].score + data.score };
+          return true; // stop searching
+      }
+    });
+    let newGlobal = ref.child(`groups/${data.groupName}/leaderboard`)
+    newGlobal.set(arr)
+  }).catch((error) => {
+    console.error(error);
+  });
+}
