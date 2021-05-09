@@ -134,7 +134,7 @@ function Groups({user}){
             <div id="sidebar" className="sidebar">
               <button className="close-bar" onClick={closeBar}>Close &times;</button>
               <ul className="grouplist"> 
-                  {groups.map((element,id) => <li key={element}><button onClick={(e) => selectGroupHandler(id, e)}>{element}</button></li>)}
+                  {groups.map((element,id) => <li key={element}><button className="grouplist-elements" onClick={(e) => selectGroupHandler(id, e)}>{element}</button></li>)}
               </ul>
             </div>
             }
@@ -182,9 +182,11 @@ function Groups({user}){
             }
             { joining ? 
             <div className="join-panel">
-              {joinList.map((element,id) => <li key={element}><button onClick={(e) => selectJoinHandler(id, e)}>{element}</button></li>)}
-              <button className="cancel" onClick={() => setJoining(false)}>&times;</button>
+              <div className="bullet-list">
+              {joinList.map((element,id) => <li className="bullet" key={element}><button className="groups-to-join" onClick={(e) => selectJoinHandler(id, e)}>{element}</button></li>)}
+              </div>
               <button className="confirm" onClick={confirmJoin}>Confirm</button>
+              <button className="cancel" onClick={() => setJoining(false)}>&times;</button>
             </div>
             :
             <></>

@@ -270,6 +270,22 @@ button:hover {
 
 .grouplist {
     list-style-type: none;
+    height: 38.65rem;
+    flex-direction: column;
+    display: flex; 
+    overflow: auto;
+    border-collapse: collapse;
+}
+
+.grouplist-elements {
+    margin-top: .5rem;
+    margin-left: .5rem;
+    border: .1rem;
+    border-style: solid;
+    border-color: var(--darkest-green);
+    background-color: transparent;
+    color: var(--darkest-green);
+    cursor: pointer;
 }
 
 /*
@@ -334,11 +350,15 @@ button:hover {
 }
 
 .close-bar {
+    margin-top: .5rem;
     color: var(--darkest-green);
-    font-size: 1.5rem;
-    background-color: none;
+    font-size: 2rem;
     border: none;
+    font-weight: bold;
+    background-color: transparent;
 }
+
+/* Create */
 
 .formk {
     margin-top: 1rem;
@@ -348,6 +368,7 @@ button:hover {
 .form-field {
     display: flex;
     margin-top: .5rem;
+    margin-left: 1rem;
 }
 
 .form-input {
@@ -381,6 +402,54 @@ button:hover {
     border: .2rem;
     border-style: solid;
     padding: .025rem .5rem .025rem .5rem;
+    border-color: var(--pink);
+    background-color: transparent;
+    color: var(--pink);
+    cursor: pointer;
+}
+
+/* Join */
+
+.join-panel {
+    margin-top: 1rem;
+}
+
+.bullet-list {
+    height: 8rem;
+    flex-direction: column;
+    display: flex; 
+    overflow: auto;
+    border-collapse: collapse;
+}
+
+.bullet {
+    margin-left: 1rem;
+    list-style-type: circle;
+    color: var(--pink);
+}
+
+.groups-to-join {
+    margin-top: .25rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    border: .1rem;
+    border-style: solid;
+    padding: .5rem;
+    border-color: var(--pink);
+    background-color: transparent;
+    color: var(--pink);
+    cursor: pointer;
+}
+
+.confirm {
+    margin-top: 1rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    border: .2rem;
+    border-style: solid;
+    padding: 1rem .3rem 1rem .3rem;
+    font-size: 1.5rem;
+    font-weight: bold;
     border-color: var(--pink);
     background-color: transparent;
     color: var(--pink);
