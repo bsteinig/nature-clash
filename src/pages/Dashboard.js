@@ -60,7 +60,7 @@ function Dashboard({user}){
             : <button onClick={() => buttonClicked()} className='global-challenges'>View Weekly Challenges</button>}
             {displayChallenges()}
 
-            <h1 className="title">Leaderboard</h1>
+            <h1 className="title-dash">Leaderboard</h1>
             <div id="HASH" className="leaderboard-element-titles">
               <div id="left">
                 <span id="time-HASH" className="smalltext">Name</span>

@@ -60,6 +60,7 @@ function Groups({user}){
 
     const createGroupHandler = () => {
       setCreating(true)
+      setJoining(false)
     }
 
     const joinGroupHandler = () => {
@@ -68,6 +69,7 @@ function Groups({user}){
         setJoinList(retrievedData)
       })
       setJoining(true)
+      setCreating(false)
     }
 
     const selectJoinHandler = (id, e) => {
@@ -137,7 +139,7 @@ function Groups({user}){
             </div>
             }
             <div className="groups-header"><button onClick={openBar} className="open-bar">☰</button> <h1 className="title">Groups</h1></div>
-            <span className="log-tag">See your groups below, <span className="username">{(user.displayName).split(' ')[0]}</span></span>
+            <span className="username">{'See your groups below, ' + (user.displayName).split(' ')[0]}</span>
             <div>
               <button className="group-btn" onClick={createGroupHandler}>Create</button>
               <button className="group-btn" onClick={joinGroupHandler}>Join</button>

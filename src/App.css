@@ -127,7 +127,7 @@ button:hover {
     height: 100vh;
 }
 
-.title {
+.title-dash {
     position: absolute;
     bottom: 23rem;
 }
@@ -273,7 +273,7 @@ button:hover {
 }
 
 /*
-Groups Page
+ Groups Page
 */
 
 .group {
@@ -281,6 +281,26 @@ Groups Page
     flex-direction: column;
     background-color: var(--dark-green);
     height: 100vh;
+}
+
+.username {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: .5rem;
+    color: var(--pink);
+}
+
+.group-btn {
+    margin-top: .5rem;
+    margin-left: .5rem;
+    border: .2rem;
+    border-style: solid;
+    padding: .5rem;
+    border-color: var(--pink);
+    background-color: transparent;
+    color: var(--pink);
+    cursor: pointer;
 }
 
 .groups-header {
@@ -318,4 +338,51 @@ Groups Page
     font-size: 1.5rem;
     background-color: none;
     border: none;
+}
+
+.formk {
+    margin-top: 1rem;
+    color: var(--pink);
+}
+
+.form-field {
+    display: flex;
+    margin-top: .5rem;
+}
+
+.form-input {
+    margin-left: .5rem;
+    margin-right: .5rem;
+    border: .1rem;
+    border-style: solid;
+    padding: .5rem;
+    border-color: var(--pink);
+    background-color: transparent;
+    color: var(--pink);
+    cursor: pointer;
+}
+
+.todo-button {
+    margin-top: 1rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    border: .2rem;
+    border-style: solid;
+    padding: .5rem;
+    border-color: var(--pink);
+    background-color: transparent;
+    color: var(--pink);
+    cursor: pointer;
+}
+
+.cancel {
+    color: var(--pink);
+    font-size: 2rem;
+    border: .2rem;
+    border-style: solid;
+    padding: .025rem .5rem .025rem .5rem;
+    border-color: var(--pink);
+    background-color: transparent;
+    color: var(--pink);
+    cursor: pointer;
 }
