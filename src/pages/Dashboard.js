@@ -33,11 +33,14 @@ function Dashboard({user}){
 
     function buttonClicked() {
       setClicked(prevclicked => !prevclicked)
-      console.log("check")
-      if(clicked){
-        console.log("check2")
-        document.getElementByID("one-time").innerHTML = "Pick up trash";
-        document.getElementByID("unlimited").innerHTML = "Plant a Tree";
+    }
+
+    function displayChallenges() {
+      if(clicked) {
+        return <div className ="global-chal">
+          <button onClick={() => oneTimeButtonClicked} className="global-challenges one-time" id='one-time'>Pick Up 10 Pieces of Trash - 5 pts</button>
+          <button onClick={() => unlimitedButtonClicked} className="global-challenges unlimited" id='unlimed'>Plant a Tree - 100 pts</button>
+        </div>
       }
     }
 
@@ -52,11 +55,13 @@ function Dashboard({user}){
     return(
         <div className="dashboard">
             <img src={earth} alt="earth" className="icon"/>
-            <button onClick={() => buttonClicked} className='global-challenges'>View Weekly Challenges</button>
-            <button onClick={() => oneTimeButtonClicked} className="global-challenges one-time" id='one-time'>Pick Up 10 Pieces of Trash</button>
-            <button onClick={() => unlimitedButtonClicked} className="global-challenges unlimited" id='unlimed'>Plant a Tree</button>
+            
+            {clicked ? <button onClick={() => buttonClicked()} className='global-challenges'>Hide Weekly Challenges</button>
+            : <button onClick={() => buttonClicked()} className='global-challenges'>View Weekly Challenges</button>}
+            {displayChallenges()}
+
             <h1 className="title">Leaderboard</h1>
-            <div id="HASH" className="blue-msg">
+            <div id="HASH" className="leaderboard-element-titles">
               <div id="left">
                 <span id="time-HASH" className="smalltext">Name</span>
               </div>

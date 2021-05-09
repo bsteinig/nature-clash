@@ -127,7 +127,13 @@ button:hover {
     height: 100vh;
 }
 
+.title {
+    position: absolute;
+    bottom: 23rem;
+}
+
 .global-challenges {
+    margin-top: .5rem;
     border: .2rem;
     border-style: solid;
     padding: .5rem;
@@ -135,6 +141,12 @@ button:hover {
     background-color: transparent;
     color: var(--pink);
     cursor: pointer;
+}
+
+.global-chal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .name {
@@ -166,6 +178,11 @@ button:hover {
     text-align: right;
 }
 
+.leaderboard-element-titles {
+    position: absolute;
+    bottom: 20.85rem;
+}
+
 .leaderboard {
     padding: 1rem .25rem;
     list-style-type: none;
@@ -182,6 +199,9 @@ button:hover {
     display: flex; 
     overflow: auto;
     border-collapse: collapse;
+
+    position: absolute;
+    bottom: 10.35rem;
 }
 
 .entry {
