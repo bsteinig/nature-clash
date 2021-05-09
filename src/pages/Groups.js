@@ -61,6 +61,7 @@ function Groups({user}){
     const createGroupHandler = () => {
       setCreating(true)
       setJoining(false)
+      setSelected(-1);
     }
 
     const joinGroupHandler = () => {
@@ -70,6 +71,7 @@ function Groups({user}){
       })
       setJoining(true)
       setCreating(false)
+      setSelected(-1);
     }
 
     const selectJoinHandler = (id, e) => {
@@ -79,6 +81,10 @@ function Groups({user}){
 
     const selectGroupHandler = (id, e) => {
       setSelected(id)
+      if(id !== -1){
+        setJoining(false)
+        setCreating(false)
+      }
     }
 
     function confirmJoin() {
@@ -195,9 +201,23 @@ function Groups({user}){
               <></>
             :
               <div className="group-leaderboard">
-                <p>{groupData[selected].challenge}</p>
-                <img src={groupData[selected].banner} alt="banner" height="50"/>
+                <p className="challenge" >{groupData[selected].challenge}</p>
+                <img className="image" src={groupData[selected].banner} alt="banner" height="200"/>
+                <h1 className="title-dash">Leaderboard</h1>
+                <div id="HASH" className="leaderboard-element-titles shift-right">
+                  <div id="left">
+                    <span id="time-HASH" className="smalltext">Name</span>
+                  </div>
+                  <div id="right">
+                    <span className="ios-circle">Points</span>
+                  </div>
+                </div>
                 <Leaderboard data={groupData[selected].leaderboard}/>
+                <div className="center-this" >
+                <div className="user">
+                . {`${user.displayName} `}  pts
+                </div>
+                </div>
               </div>
             }
             <Menu user={user}/>

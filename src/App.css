@@ -130,6 +130,13 @@ button:hover {
 .title-dash {
     position: absolute;
     bottom: 23rem;
+    color: var(--pink);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 
 .global-challenges {
@@ -179,8 +186,13 @@ button:hover {
 }
 
 .leaderboard-element-titles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
+    color: var(--pink);
     bottom: 20.85rem;
+    text-align: center;
 }
 
 .leaderboard {
@@ -202,6 +214,12 @@ button:hover {
 
     position: absolute;
     bottom: 10.35rem;
+
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 
 .entry {
@@ -226,7 +244,7 @@ button:hover {
     border-width: .5rem;
     font-size: 1.5rem;
     position: absolute;
-    bottom: 8.35rem;
+    bottom: 6.8rem;
 }
 
 /*
@@ -454,4 +472,41 @@ button:hover {
     background-color: transparent;
     color: var(--pink);
     cursor: pointer;
+}
+
+/* Individal Group */
+
+.challenge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--pink);
+    margin-top: 1rem;
+}
+
+.image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-color: var(--pink);
+    margin-top: 1rem;
+}
+
+.shift-right{
+    margin-left: 2.25rem;
+}
+
+.center-this {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
