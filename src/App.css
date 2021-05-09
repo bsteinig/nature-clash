@@ -25,7 +25,7 @@
 }
 
 /*
-Home
+ Home
 */
 
 .home {
@@ -69,12 +69,8 @@ Home
     z-index: 1;
 } 
 
-a:hover {
-    background-color: var(--shadow-red);
-}
-
 /*
-Sign In
+ Sign In
 */
 
 .login-page {
@@ -119,7 +115,7 @@ button:hover {
 }
 
 /* 
-Dashboard
+ Dashboard
 */
 
 .dashboard{
@@ -136,16 +132,42 @@ Dashboard
     border-style: solid;
     padding: .5rem;
     border-color: var(--pink);
+    background-color: transparent;
+    color: var(--pink);
     cursor: pointer;
 }
 
-.bullet-title {
-    display: flex;
-    
+.name {
+    margin: 0;
+    display: inline;
+    float: left;
+}
+
+.points {
+    margin: 0;
+    display: inline;
+    float: right;
+}
+
+.scores {
+    text-align: right;
+}
+
+#HASH {
+    width: 80%;
+}
+
+#HASH div {
+    width: 49%;
+    display: inline-block;
+}
+
+#right {
+    text-align: right;
 }
 
 .leaderboard {
-    padding: 1rem 1rem;
+    padding: 1rem .25rem;
     list-style-type: none;
     background-color: var(--pink);
     color: var(--dark-green);
@@ -154,14 +176,35 @@ Dashboard
     text-align: left;
     border-width: .5rem;
     font-size: 1.5rem;
+    height: 5rem;
+
+    flex-direction: column;
+    display: flex; 
+    overflow: auto;
+    border-collapse: collapse;
 }
 
 .entry {
     text-align: left;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;;
 }
 
 .leaderName {
     text-align: left;
+}
+
+.user {
+    padding: 1rem .25rem;
+    list-style-type: none;
+    background-color: var(--pink);
+    color: var(--dark-green);
+    border-radius: 1rem;
+    width: 92.5%;
+    text-align: left;
+    border-width: .5rem;
+    font-size: 1.5rem;
 }
 
 /*
@@ -200,4 +243,8 @@ Dashboard
     height: 75px;
     width: 2px;
     background-color: var(--dark-green);
+}
+
+.grouplist {
+    list-style-type: none;
 }

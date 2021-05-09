@@ -108,6 +108,10 @@ export const updateToExisting = (data) => {
     updateAcc.update({'isNew': false})
 }
 
+export const createGroup = (data) => {
+
+}
+
 export const getUserData = (user, callback) => {
   var defaultDatabase = firebase.database();
   let ref = defaultDatabase.ref("/");
@@ -131,6 +135,15 @@ export const fetchGlobalLeaders = (callback) => {
   let ref = defaultDatabase.ref("/");
   let timelines = ref.child(`global/leaderboard`);
   timelines.on('value', (snapshot) => {
+    callback(snapshot.val());
+  })
+}
+
+export const fetchGlobalChallenges = (callback) => {
+  var defaultDatabase = firebase.database();
+  let ref = defaultDatabase.ref("/");
+  let exportdata = ref.child('global/challenges');
+  exportdata.on('value', (snapshot) => {
     callback(snapshot.val());
   })
 }
