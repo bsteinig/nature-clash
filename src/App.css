@@ -171,12 +171,12 @@ button:hover {
     list-style-type: none;
     background-color: var(--pink);
     color: var(--dark-green);
-    border-radius: 1rem;
+    border-radius: 1rem 1rem 0 0;
     width: 92.5%;
     text-align: left;
     border-width: .5rem;
     font-size: 1.5rem;
-    height: 5rem;
+    height: 10.5rem;
 
     flex-direction: column;
     display: flex; 
@@ -198,13 +198,15 @@ button:hover {
 .user {
     padding: 1rem .25rem;
     list-style-type: none;
-    background-color: var(--pink);
+    background-color: var(--green);
     color: var(--dark-green);
-    border-radius: 1rem;
+    border-radius: 0 0 1rem 1rem;
     width: 92.5%;
     text-align: left;
     border-width: .5rem;
     font-size: 1.5rem;
+    position: absolute;
+    bottom: 8.35rem;
 }
 
 /*
@@ -220,6 +222,7 @@ button:hover {
     align-items: center;
     padding: .5rem 5vw;
     background-color: var(--darkest-green);
+    z-index: 2;
 }
 
 .propic{
@@ -247,4 +250,52 @@ button:hover {
 
 .grouplist {
     list-style-type: none;
+}
+
+/*
+Groups Page
+*/
+
+.group {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-green);
+    height: 100vh;
+}
+
+.groups-header {
+    display: flex;
+    justify-content: flex-start;
+    background-color: var(--pink);
+    padding: .5rem;
+    color: var(--darkest-green);
+    align-items: center;
+}
+
+.sidebar {
+    display: none;
+    height:100%;
+    width: 33vw;
+    background-color: var(--pink);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:1;
+    overflow: auto;
+    transition: all 0.4s ease;
+}
+
+.open-bar{
+    color: var(--darkest-green);
+    font-size: 2rem;
+    background: none;
+    padding: 0 .5rem;
+    border: none;
+}
+
+.close-bar {
+    color: var(--darkest-green);
+    font-size: 1.5rem;
+    background-color: none;
+    border: none;
 }

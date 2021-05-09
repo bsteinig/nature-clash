@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchGlobalLeaders, fetchGlobalChallenges, getUserData } from '../database/firebase' 
 import earth from '../assets/earth.svg'
 import Menu from '../components/menu'
+import Leaderboard from '../components/leaderboard';
 
 function Dashboard({user}){
 
@@ -66,17 +67,7 @@ function Dashboard({user}){
             { loading ? 
             <></>
             :
-            <table className="leaderboard"> 
-              <tbody>
-                {leaderboard.map((element,index) => 
-                <tr className="entry" key={element.name}> 
-                  <td>{`${index+1}.`}</td> 
-                  <td className="leaderName">{`${element.name} `}</td>  
-                  <td className="scores">{`${element.score} pts`}</td>
-                </tr>
-              )}
-              </tbody>
-            </table>
+            <Leaderboard data={leaderboard}/>
             }
             <div className="user">
             . {`${user.displayName} `}  pts

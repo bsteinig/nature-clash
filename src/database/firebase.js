@@ -109,7 +109,73 @@ export const updateToExisting = (data) => {
 }
 
 export const createGroup = (data) => {
+  var defaultDatabase = firebase.database();
+  let ref = defaultDatabase.ref("/")
+  let newTimeline = ref.child(`groups/${data.groupName}`);
+  newTimeline.set(data.sendData) // create Group
+  ref.child(`users/${data.uid}/groups`).get().then((snapshot) => {
+    let arr = snapshot.val();
+    arr.push(data.groupName)
+    let newGlobal = ref.child(`users/${data.uid}/groups`)
+    newGlobal.set(arr)// add group name to user account
+  }).catch((error) => {
+    console.error(error);
+  });
+  ref.child('joinList').get().then((snapshot) => {
+    let dt = snapshot.val();
+    dt.push(data.groupName)
+    let newList = ref.child('joinList')
+    newList.set(dt)
+  }).catch((error) => {
+    console.error(error);
+  });
+}
 
+export const fetchGroup = (name, callback) => {
+  var defaultDatabase = firebase.database();
+  let ref = defaultDatabase.ref("/");
+  let timelines = ref.child(`groups/${name}`);
+  timelines.on('value', (snapshot) => {
+    callback(snapshot.val());
+  })
+}
+
+export const fetchJoinList = (callback) => {
+  var defaultDatabase = firebase.database();
+  let ref = defaultDatabase.ref("/");
+  let timelines = ref.child(`joinList`);
+  timelines.on('value', (snapshot) => {
+    callback(snapshot.val());
+  })
+}
+
+export const joinGroup = (data) => {
+  var defaultDatabase = firebase.database();
+  let ref = defaultDatabase.ref("/")
+  ref.child(`users/${data.uid}/groups`).get().then((snapshot) => {
+    let arr = snapshot.val();
+    arr.push(data.groupName)
+    let newGlobal = ref.child(`users/${data.uid}/groups`)
+    newGlobal.set(arr)// add group name to user account
+  }).catch((error) => {
+    console.error(error);
+  });
+  ref.child(`groups/${data.groupName}/leaderboard`).get().then((snapshot) => {
+    let arr = snapshot.val();
+    arr.push({name: data.name, score: 0})
+    let newGlobal = ref.child(`groups/${data.groupName}/leaderboard`)
+    newGlobal.set(arr)
+  }).catch((error) => {
+    console.error(error);
+  });
+  ref.child(`groups/${data.groupName}/members`).get().then((snapshot) => {
+    let arr = snapshot.val();
+    arr.push(data.name)
+    let newGlobal = ref.child(`groups/${data.groupName}/members`)
+    newGlobal.set(arr)
+  }).catch((error) => {
+    console.error(error);
+  });
 }
 
 export const getUserData = (user, callback) => {
